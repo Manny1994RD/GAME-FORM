@@ -7,7 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; }
         .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; }
-        input[type="number"], input[type="text"], input[type="date"] { width: 200px; }
+        input[type="number"], input[type="text"], input[type="date"], select { width: 200px; }
         label { margin-right: 10px; }
         #copyButton { margin-top: 10px; }
     </style>
@@ -16,7 +16,7 @@
     <div class="container">
         <h1>Points Submission Form</h1>
 
-        <!-- Member Name and Date Input -->
+        <!-- Member Name, Date, and Location Input -->
         <div>
             <label>Member Name: </label>
             <input type="text" id="memberName" placeholder="Enter your name">
@@ -24,6 +24,16 @@
         <div>
             <label>Date: </label>
             <input type="date" id="submissionDate">
+        </div>
+        <div>
+            <label>Location (Sion): </label>
+            <select id="location">
+                <option value="Santiago">Santiago</option>
+                <option value="La Vega">La Vega</option>
+                <option value="Moca">Moca</option>
+                <option value="Puerto Plata">Puerto Plata</option>
+                <option value="Jarabacoa">Jarabacoa</option>
+            </select>
         </div>
         <hr>
 
@@ -105,10 +115,10 @@
                 <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (check input = x2 total)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="guienoCheck"> GUIENO (check input = 500)</label>
+                <label><input type="checkbox" id="guienoCheck"> GUIENO (check input = -500)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (check input = 100)</label>
+                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (check input = -100)</label>
             </div>
 
             <!-- Calculate Total Points Button -->
@@ -123,6 +133,7 @@
         <h3>Member Information:</h3>
         <p><strong>Name:</strong> <span id="displayName"></span></p>
         <p><strong>Date:</strong> <span id="displayDate"></span></p>
+        <p><strong>Location:</strong> <span id="displayLocation"></span></p>
 
         <!-- Display Entered Information -->
         <h3>Entered Information:</h3>
@@ -159,67 +170,9 @@
             if (document.getElementById('diaDePrepararCheck').checked) total += 50;
             if (document.getElementById('cartaMadreCheck').checked) total += 10;
             if (document.getElementById('hongoCheck').checked) total += 500;
-            if (document.getElementById('guienoCheck').checked) total += 500;
-            if (document.getElementById('tortugaRojaCheck').checked) total += 100;
+            if (document.getElementById('guienoCheck').checked) total -= 500;  // Subtract 500
+            if (document.getElementById('tortugaRojaCheck').checked) total -= 100;  // Subtract 100
 
             // Arcoiris special case: x2 the total
-            if (document.getElementById('arcoirisCheck').checked) {
-                total *= 2;
-            }
+           
 
-            document.getElementById('totalPoints').innerText = total;
-
-            // Display member name and date
-            const name = document.getElementById('memberName').value;
-            const date = document.getElementById('submissionDate').value;
-            document.getElementById('displayName').innerText = name;
-            document.getElementById('displayDate').innerText = date;
-
-            // Collect all entered data (only if filled or checked)
-            let info = `Member Name: ${name}\nDate: ${date}\n\nPoints Submitted:\n`;
-
-            if (document.getElementById('predicar').value > 0) info += `PREDICAR: ${document.getElementById('predicar').value}\n`;
-            if (document.getElementById('significativo').value > 0) info += `SIGNIFICATIVO: ${document.getElementById('significativo').value}\n`;
-            if (document.getElementById('estudio').value > 0) info += `ESTUDIO: ${document.getElementById('estudio').value}\n`;
-            if (document.getElementById('invitados').value > 0) info += `INVITADOS: ${document.getElementById('invitados').value}\n`;
-            if (document.getElementById('bautismo').value > 0) info += `BAUTISMO: ${document.getElementById('bautismo').value}\n`;
-            if (document.getElementById('culto').value > 0) info += `CULTO: ${document.getElementById('culto').value}\n`;
-            if (document.getElementById('apacienta').value > 0) info += `APACIENTA: ${document.getElementById('apacienta').value}\n`;
-            if (document.getElementById('firma').value > 0) info += `FIRMA: ${document.getElementById('firma').value}\n`;
-            if (document.getElementById('videoSermon').value > 0) info += `VIDEO SERMON: ${document.getElementById('videoSermon').value}\n`;
-            if (document.getElementById('libroPadre').value > 0) info += `LIBRO PADRE: ${document.getElementById('libroPadre').value}\n`;
-            if (document.getElementById('libroPastor').value > 0) info += `LIBRO PASTOR: ${document.getElementById('libroPastor').value}\n`;
-            if (document.getElementById('ag').value > 0) info += `AG: ${document.getElementById('ag').value}\n`;
-            if (document.getElementById('edulms').value > 0) info += `EDULMS: ${document.getElementById('edulms').value}\n`;
-
-            // Add Check Input values if checked
-            if (document.getElementById('miPaginaCheck').checked) info += `MI PAGINA: Completed\n`;
-            if (document.getElementById('prayDailyCheck').checked) info += `PRAY DAILY: Completed\n`;
-            if (document.getElementById('offlineEduCheck').checked) info += `OFFLINE EDU: Completed\n`;
-            if (document.getElementById('diaDePrepararCheck').checked) info += `DIA DE PREPARAR: Completed\n`;
-            if (document.getElementById('cartaMadreCheck').checked) info += `CARTA A MADRE: Completed\n`;
-            if (document.getElementById('hongoCheck').checked) info += `HONGO: Completed\n`;
-            if (document.getElementById('arcoirisCheck').checked) info += `ARCOIRIS: Completed\n`;
-            if (document.getElementById('guienoCheck').checked) info += `GUIENO: Completed\n`;
-            if (document.getElementById('tortugaRojaCheck').checked) info += `TORTUGA ROJA: Completed\n`;
-
-            // Add the total points to the info
-            info += `\nTotal Points: ${total}\n`;
-
-            // Display entered information
-            document.getElementById('enteredInfo').innerText = info;
-        }
-
-        function copyInfo() {
-            const info = document.getElementById('enteredInfo').innerText;
-            const textarea = document.createElement('textarea');
-            textarea.value = info;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('Information copied to clipboard!');
-        }
-    </script>
-</body>
-</html>
