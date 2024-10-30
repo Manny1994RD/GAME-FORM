@@ -40,85 +40,85 @@
         <!-- Per Number Input Categories -->
         <form id="pointsForm">
             <div>
-                <label>PREDICAR (per number, input=1): </label>
+                <label>PREDICAR (1): </label>
                 <input type="number" id="predicar" value="0">
             </div>
             <div>
-                <label>SIGNIFICATIVO (per number, input=2): </label>
+                <label>SIGNIFICATIVO (2): </label>
                 <input type="number" id="significativo" value="0">
             </div>
             <div>
-                <label>ESTUDIO (per number, input=50): </label>
+                <label>ESTUDIO (50): </label>
                 <input type="number" id="estudio" value="0">
             </div>
             <div>
-                <label>INVITADOS (per number, input=50): </label>
+                <label>INVITADOS (50): </label>
                 <input type="number" id="invitados" value="0">
             </div>
             <div>
-                <label>BAUTISMO (per number, input=500): </label>
+                <label>BAUTISMO (500): </label>
                 <input type="number" id="bautismo" value="0">
             </div>
             <div>
-                <label>CULTO (per number, input=1000): </label>
+                <label>CULTO (1000): </label>
                 <input type="number" id="culto" value="0">
             </div>
             <div>
-                <label>APACIENTA (per number, input=5): </label>
+                <label>APACIENTA (5): </label>
                 <input type="number" id="apacienta" value="0">
             </div>
             <div>
-                <label>FIRMA (per number, input=10): </label>
+                <label>FIRMA (10): </label>
                 <input type="number" id="firma" value="0">
             </div>
             <div>
-                <label>VIDEO SERMON (per number, input=10): </label>
+                <label>VIDEO SERMON (10): </label>
                 <input type="number" id="videoSermon" value="0">
             </div>
             <div>
-                <label>LIBRO PADRE (per number, input=10): </label>
+                <label>LIBRO PADRE (10): </label>
                 <input type="number" id="libroPadre" value="0">
             </div>
             <div>
-                <label>LIBRO PASTOR (per number, input=10): </label>
+                <label>LIBRO PASTOR (10): </label>
                 <input type="number" id="libroPastor" value="0">
             </div>
             <div>
-                <label>AG (per number, input=75): </label>
+                <label>AG (75): </label>
                 <input type="number" id="ag" value="0">
             </div>
             <div>
-                <label>EDULMS (per number, input=200): </label>
+                <label>EDULMS (200): </label>
                 <input type="number" id="edulms" value="0">
             </div>
 
             <!-- Check Input Categories -->
             <div>
-                <label><input type="checkbox" id="miPaginaCheck"> MI PAGINA (check input = 25)</label>
+                <label><input type="checkbox" id="miPaginaCheck"> MI PAGINA (25)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="prayDailyCheck"> PRAY DAILY (check input = 25)</label>
+                <label><input type="checkbox" id="prayDailyCheck"> PRAY DAILY (25)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="offlineEduCheck"> OFFLINE EDU (check input = 50)</label>
+                <label><input type="checkbox" id="offlineEduCheck"> OFFLINE EDU (50)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="diaDePrepararCheck"> DIA DE PREPARAR (check input = 50)</label>
+                <label><input type="checkbox" id="diaDePrepararCheck"> DIA DE PREPARAR (50)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (check input = 10)</label>
+                <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (10)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="hongoCheck"> HONGO (check input = 500)</label>
+                <label><input type="checkbox" id="hongoCheck"> HONGO (500)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (check input = x2 total)</label>
+                <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (x2 total)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="guienoCheck"> GUIENO (check input = -500)</label>
+                <label><input type="checkbox" id="guienoCheck"> GUIENO (-500)</label>
             </div>
             <div>
-                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (check input = -100)</label>
+                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
             </div>
 
             <!-- Calculate Total Points Button -->
@@ -174,5 +174,65 @@
             if (document.getElementById('tortugaRojaCheck').checked) total -= 100;  // Subtract 100
 
             // Arcoiris special case: x2 the total
-           
+            if (document.getElementById('arcoirisCheck').checked) {
+                total *= 2;
+            }
 
+            document.getElementById('totalPoints').innerText = total;
+
+            // Display member name, date, and location
+            const name = document.getElementById('memberName').value;
+            const date = document.getElementById('submissionDate').value;
+            const location = document.getElementById('location').value;
+            document.getElementById('displayName').innerText = name;
+            document.getElementById('displayDate').innerText = date;
+            document.getElementById('displayLocation').innerText = location;
+
+            // Collect all entered data (only if filled or checked)
+            let info = `Member Name: ${name}\nDate: ${date}\nLocation: ${location}\n\nPoints Submitted:\n`;
+
+            if (document.getElementById('predicar').value > 0) info += `PREDICAR: ${document.getElementById('predicar').value}\n`;
+            if (document.getElementById('significativo').value > 0) info += `SIGNIFICATIVO: ${document.getElementById('significativo').value}\n`;
+            if (document.getElementById('estudio').value > 0) info += `ESTUDIO: ${document.getElementById('estudio').value}\n`;
+            if (document.getElementById('invitados').value > 0) info += `INVITADOS: ${document.getElementById('invitados').value}\n`;
+            if (document.getElementById('bautismo').value > 0) info += `BAUTISMO: ${document.getElementById('bautismo').value}\n`;
+            if (document.getElementById('culto').value > 0) info += `CULTO: ${document.getElementById('culto').value}\n`;
+            if (document.getElementById('apacienta').value > 0) info += `APACIENTA: ${document.getElementById('apacienta').value}\n`;
+            if (document.getElementById('firma').value > 0) info += `FIRMA: ${document.getElementById('firma').value}\n`;
+            if (document.getElementById('videoSermon').value > 0) info += `VIDEO SERMON: ${document.getElementById('videoSermon').value}\n`;
+            if (document.getElementById('libroPadre').value > 0) info += `LIBRO PADRE: ${document.getElementById('libroPadre').value}\n`;
+            if (document.getElementById('libroPastor').value > 0) info += `LIBRO PASTOR: ${document.getElementById('libroPastor').value}\n`;
+            if (document.getElementById('ag').value > 0) info += `AG: ${document.getElementById('ag').value}\n`;
+            if (document.getElementById('edulms').value > 0) info += `EDULMS: ${document.getElementById('edulms').value}\n`;
+
+            // Add Check Input values if checked
+            if (document.getElementById('miPaginaCheck').checked) info += `MI PAGINA: Completed\n`;
+            if (document.getElementById('prayDailyCheck').checked) info += `PRAY DAILY: Completed\n`;
+            if (document.getElementById('offlineEduCheck').checked) info += `OFFLINE EDU: Completed\n`;
+            if (document.getElementById('diaDePrepararCheck').checked) info += `DIA DE PREPARAR: Completed\n`;
+            if (document.getElementById('cartaMadreCheck').checked) info += `CARTA A MADRE: Completed\n`;
+            if (document.getElementById('hongoCheck').checked) info += `HONGO: Completed\n`;
+            if (document.getElementById('arcoirisCheck').checked) info += `ARCOIRIS: Completed\n`;
+            if (document.getElementById('guienoCheck').checked) info += `GUIENO: Completed\n`;
+            if (document.getElementById('tortugaRojaCheck').checked) info += `TORTUGA ROJA: Completed\n`;
+
+            // Add the total points to the info
+            info += `\nTotal Points: ${total}\n`;
+
+            // Display entered information
+            document.getElementById('enteredInfo').innerText = info;
+        }
+
+        function copyInfo() {
+            const info = document.getElementById('enteredInfo').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = info;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Information copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
