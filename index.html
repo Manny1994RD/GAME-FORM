@@ -33,9 +33,14 @@
             gap: 15px;
         }
 
+        /* Row Styling */
         .form-row {
             display: flex;
             flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: span 2;
         }
 
         label {
@@ -102,15 +107,15 @@
         <!-- Formulario -->
         <form id="pointsForm">
             <!-- Personal Information -->
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label for="memberName">Nombre del Miembro</label>
                 <input type="text" id="memberName" placeholder="Introduce tu nombre" required>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label for="submissionDate">Fecha</label>
                 <input type="date" id="submissionDate" required>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label for="location">Ubicación (Sion)</label>
                 <select id="location">
                     <option value="Santiago">Santiago</option>
@@ -121,7 +126,7 @@
                 </select>
             </div>
 
-            <!-- Numeric Input Fields -->
+            <!-- Numeric Input Fields in Two Columns -->
             <div class="form-row">
                 <label for="simple">SIMPLE (1)</label>
                 <input type="number" id="simple" value="0">
@@ -175,32 +180,32 @@
                 <input type="number" id="edulms" value="0">
             </div>
 
-            <!-- Checkbox Fields -->
-            <div class="form-row">
+            <!-- Checkbox Fields in Two Columns -->
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="miPaginaCheck"> MI PÁGINA (25)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="prayDailyCheck"> ORACIÓN DIARIA (25)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="offlineEduCheck"> EDUCACIÓN FUERA DE LÍNEA (50)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="diaDePrepararCheck"> DÍA DE PREPARACIÓN (50)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (10)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="hongoCheck"> HONGO (500)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (x2 total)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="guienoCheck"> GUIENO (-500)</label>
             </div>
-            <div class="form-row">
+            <div class="form-row full-width">
                 <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
             </div>
 
