@@ -25,27 +25,24 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 10px;  /* Reducing the gap between form rows */
-        }
-        label {
-            font-size: 1rem;
-            margin-right: 10px;
-            flex: 1;
-        }
-        input[type="number"], input[type="text"], input[type="date"], select {
-            width: 100px;  /* Smaller width for input fields */
-            padding: 5px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-left: 10px;  /* Closer to the label */
+            gap: 10px;
         }
         .form-row {
             display: flex;
             align-items: center;
+            justify-content: space-between; /* Distribute the space between label and input */
         }
-        .form-row label {
-            flex-grow: 1;  /* Allow label to grow */
+        label {
+            font-size: 1rem;
+            flex: 1;
+        }
+        input[type="number"], input[type="text"], input[type="date"], select {
+            width: 100px; /* Reduced width for input fields */
+            padding: 5px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 10px; /* Space between label and input */
         }
         button {
             padding: 12px;
@@ -87,6 +84,10 @@
                 font-size: 1.2rem;
                 width: 100px;
             }
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start; /* Stacks label and input on smaller screens */
+            }
         }
     </style>
 </head>
@@ -94,7 +95,7 @@
     <div class="container">
         <h1>Formulario de Envío de Puntos</h1>
 
-        <!-- Nombre del miembro, fecha y ubicación -->
+        <!-- Formulario -->
         <form id="pointsForm">
             <div class="form-row">
                 <label for="memberName">Nombre del Miembro:</label>
