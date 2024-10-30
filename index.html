@@ -25,24 +25,27 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;  /* Reducing the gap between form rows */
         }
         label {
             font-size: 1rem;
             margin-right: 10px;
-            flex: 1; /* Label will take up the remaining space */
+            flex: 1;
         }
         input[type="number"], input[type="text"], input[type="date"], select {
-            width: 120px;  /* Smaller width for input fields */
+            width: 100px;  /* Smaller width for input fields */
             padding: 5px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-left: 10px;  /* Closer to the label */
         }
         .form-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+        }
+        .form-row label {
+            flex-grow: 1;  /* Allow label to grow */
         }
         button {
             padding: 12px;
@@ -83,9 +86,6 @@
             input[type="number"], input[type="text"], input[type="date"], select {
                 font-size: 1.2rem;
                 width: 100px;
-            }
-            .form-row {
-                justify-content: flex-start;
             }
         }
     </style>
