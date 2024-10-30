@@ -29,13 +29,20 @@
         }
         label {
             font-size: 1rem;
+            margin-right: 10px;
         }
         input[type="number"], input[type="text"], input[type="date"], select {
-            width: 100%;
-            padding: 10px;
+            width: 80px;  /* Smaller width for number input fields */
+            padding: 5px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-left: 10px; /* Space between label and input */
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         button {
             padding: 12px;
@@ -75,6 +82,10 @@
             input[type="number"], input[type="text"], input[type="date"], select {
                 font-size: 1.2rem;
             }
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -84,15 +95,15 @@
 
         <!-- Nombre del miembro, fecha y ubicación -->
         <form id="pointsForm">
-            <div>
+            <div class="form-row">
                 <label for="memberName">Nombre del Miembro:</label>
                 <input type="text" id="memberName" placeholder="Introduce tu nombre">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="submissionDate">Fecha:</label>
                 <input type="date" id="submissionDate">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="location">Ubicación (Sion):</label>
                 <select id="location">
                     <option value="Santiago">Santiago</option>
@@ -104,85 +115,85 @@
             </div>
 
             <!-- Categorías con entrada numérica -->
-            <div>
+            <div class="form-row">
                 <label for="simple">SIMPLE (1):</label>
                 <input type="number" id="simple" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="significativo">SIGNIFICATIVO (2):</label>
                 <input type="number" id="significativo" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="estudio">ESTUDIO (50):</label>
                 <input type="number" id="estudio" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="invitados">INVITADOS (50):</label>
                 <input type="number" id="invitados" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="bautismo">BAUTISMO (500):</label>
                 <input type="number" id="bautismo" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="culto">CULTO (1000):</label>
                 <input type="number" id="culto" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="apacienta">APACIENTA (5):</label>
                 <input type="number" id="apacienta" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="firma">FIRMA (10):</label>
                 <input type="number" id="firma" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="videoSermon">VIDEO SERMON (10):</label>
                 <input type="number" id="videoSermon" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="libroPadre">LIBRO PADRE (10):</label>
                 <input type="number" id="libroPadre" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="libroPastor">LIBRO PASTOR (10):</label>
                 <input type="number" id="libroPastor" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="ag">FRIMA AG (75):</label>
                 <input type="number" id="ag" value="0">
             </div>
-            <div>
+            <div class="form-row">
                 <label for="edulms">EDULMS (200):</label>
                 <input type="number" id="edulms" value="0">
             </div>
 
             <!-- Categorías con casillas de verificación -->
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="miPaginaCheck"> MI PÁGINA (25)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="prayDailyCheck"> ORACIÓN DIARIA (25)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="offlineEduCheck"> EDUCACIÓN FUERA DE LÍNEA (50)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="diaDePrepararCheck"> DÍA DE PREPARACIÓN (50)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (10)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="hongoCheck"> HONGO (500)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (x2 total)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="guienoCheck"> GUIENO (-500)</label>
             </div>
-            <div>
+            <div class="form-row">
                 <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
             </div>
 
