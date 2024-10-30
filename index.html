@@ -4,8 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Puntos y Clasificación</title>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+        import { getDatabase, ref, push, set, get, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDRddA_EeZvCMZS5qQAi4pkYtOR_Xblib8",
+            authDomain: "mario-racer.firebaseapp.com",
+            databaseURL: "https://mario-racer-default-rtdb.firebaseio.com",
+            projectId: "mario-racer",
+            storageBucket: "mario-racer.firebasestorage.app",
+            messagingSenderId: "373143059252",
+            appId: "1:373143059252:web:5dc28e804781ff688d8361",
+            measurementId: "G-FM47SXM2G0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+    </script>
     <style>
         /* General Styling */
         body {
@@ -179,8 +200,10 @@
         </div>
     </div>
 
-    <script>
-        // Your Firebase configuration details
+    <script type="module">
+        import { getDatabase, ref, push, set, get, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+        // Firebase configuration details provided by you
         const firebaseConfig = {
             apiKey: "AIzaSyDRddA_EeZvCMZS5qQAi4pkYtOR_Xblib8",
             authDomain: "mario-racer.firebaseapp.com",
@@ -188,12 +211,13 @@
             projectId: "mario-racer",
             storageBucket: "mario-racer.firebasestorage.app",
             messagingSenderId: "373143059252",
-            appId: "1:373143059252:web:5dc28e804781ff688d8361"
+            appId: "1:373143059252:web:5dc28e804781ff688d8361",
+            measurementId: "G-FM47SXM2G0"
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
 
         // Function to calculate total points
         function calculateTotal() {
@@ -234,8 +258,8 @@
             }
 
             // Save data to Firebase
-            const newUserRef = database.ref('users').push();
-            newUserRef.set({
+            const newUserRef = push(ref(database, 'users'));
+            set(newUserRef, {
                 name: name,
                 date: date,
                 location: location,
@@ -250,9 +274,9 @@
 
         // Function to update leaderboard
         function updateLeaderboard() {
-            const usersRef = database.ref('users');
+            const usersRef = query(ref(database, 'users'), orderByChild('points'), limitToLast(10));
 
-            usersRef.orderByChild('points').limitToLast(10).once('value', (snapshot) => {
+            get(usersRef).then((snapshot) => {
                 const leaderboardBody = document.getElementById('leaderboardBody');
                 leaderboardBody.innerHTML = '';
 
@@ -274,6 +298,8 @@
                     `;
                     leaderboardBody.appendChild(row);
                 });
+            }).catch(error => {
+                console.error("Error al obtener los datos:", error);
             });
         }
 
