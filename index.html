@@ -11,6 +11,7 @@
             padding: 0;
             background-color: #f8f8f8;
         }
+
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -19,31 +20,40 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h1, h2, h3 {
             text-align: center;
         }
+
         form {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
+        /* Adjust the flexbox layout to ensure label and input are next to each other */
         .form-row {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Distribute the space between label and input */
+            justify-content: flex-start;
+            flex-wrap: nowrap; /* Prevents the input from going below the label */
+            gap: 10px; /* Adds a small gap between label and input */
         }
+
         label {
             font-size: 1rem;
-            flex: 1;
+            width: 50%; /* Set a fixed width for labels */
+            white-space: nowrap; /* Prevents label from wrapping to a new line */
         }
+
         input[type="number"], input[type="text"], input[type="date"], select {
-            width: 100px; /* Reduced width for input fields */
+            width: 30%; /* Set input width */
             padding: 5px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-left: 10px; /* Space between label and input */
         }
+
         button {
             padding: 12px;
             font-size: 1rem;
@@ -54,12 +64,15 @@
             cursor: pointer;
             width: 100%;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         #copyButton {
             margin-top: 10px;
         }
+
         #totalPoints, pre {
             text-align: center;
             font-size: 1.2rem;
@@ -82,11 +95,12 @@
             }
             input[type="number"], input[type="text"], input[type="date"], select {
                 font-size: 1.2rem;
-                width: 100px;
+                width: 50%; /* Adjust input width for smaller screens */
             }
             .form-row {
-                flex-direction: column;
-                align-items: flex-start; /* Stacks label and input on smaller screens */
+                flex-direction: row; /* Keep label and input in a row */
+                align-items: center;
+                gap: 10px;
             }
         }
     </style>
