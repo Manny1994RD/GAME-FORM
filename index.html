@@ -5,102 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Puntos</title>
     <style>
+        /* General Body Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
+            padding: 20px;
         }
 
+        /* Container Styling */
         .container {
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2, h3 {
+        h1 {
             text-align: center;
+            font-size: 1.8rem;
+            color: #333;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        /* Adjust the flexbox layout to ensure label and input are next to each other */
+        /* Form Row Styling */
         .form-row {
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            flex-wrap: nowrap; /* Prevents the input from going below the label */
-            gap: 10px; /* Adds a small gap between label and input */
+            flex-direction: column;
+            margin-bottom: 10px;
         }
 
         label {
-            font-size: 1rem;
-            width: 50%; /* Set a fixed width for labels */
-            white-space: nowrap; /* Prevents label from wrapping to a new line */
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 5px;
         }
 
-        input[type="number"], input[type="text"], input[type="date"], select {
-            width: 30%; /* Set input width */
-            padding: 5px;
+        /* Input Styling */
+        input[type="text"], input[type="number"], input[type="date"], select {
+            padding: 10px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 100%;
         }
 
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Button Styling */
         button {
-            padding: 12px;
+            grid-column: span 2;
+            padding: 15px;
             font-size: 1rem;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #0056b3;
         }
 
-        #copyButton {
-            margin-top: 10px;
-        }
-
-        #totalPoints, pre {
+        /* Total Points Display */
+        h2 {
+            grid-column: span 2;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #333;
         }
 
-        /* Mobile-friendly adjustments */
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
+        /* Success and Error Messages */
+        .message {
+            font-size: 0.9rem;
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            font-size: 0.9rem;
+            color: red;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
             }
-            h1, h2, h3 {
-                font-size: 1.5rem;
-            }
+
             button {
-                font-size: 1.2rem;
-                padding: 14px;
-            }
-            label {
-                font-size: 1.2rem;
-            }
-            input[type="number"], input[type="text"], input[type="date"], select {
-                font-size: 1.2rem;
-                width: 50%; /* Adjust input width for smaller screens */
-            }
-            .form-row {
-                flex-direction: row; /* Keep label and input in a row */
-                align-items: center;
-                gap: 10px;
+                width: 100%;
             }
         }
     </style>
@@ -112,15 +119,15 @@
         <!-- Formulario -->
         <form id="pointsForm">
             <div class="form-row">
-                <label for="memberName">Nombre del Miembro:</label>
-                <input type="text" id="memberName" placeholder="Introduce tu nombre">
+                <label for="memberName">Nombre del Miembro</label>
+                <input type="text" id="memberName" placeholder="Introduce tu nombre" required>
             </div>
             <div class="form-row">
-                <label for="submissionDate">Fecha:</label>
-                <input type="date" id="submissionDate">
+                <label for="submissionDate">Fecha</label>
+                <input type="date" id="submissionDate" required>
             </div>
             <div class="form-row">
-                <label for="location">Ubicación (Sion):</label>
+                <label for="location">Ubicación (Sion)</label>
                 <select id="location">
                     <option value="Santiago">Santiago</option>
                     <option value="La Vega">La Vega</option>
@@ -132,108 +139,50 @@
 
             <!-- Categorías con entrada numérica -->
             <div class="form-row">
-                <label for="simple">SIMPLE (1):</label>
+                <label for="simple">SIMPLE (1)</label>
                 <input type="number" id="simple" value="0">
             </div>
             <div class="form-row">
-                <label for="significativo">SIGNIFICATIVO (2):</label>
+                <label for="significativo">SIGNIFICATIVO (2)</label>
                 <input type="number" id="significativo" value="0">
             </div>
             <div class="form-row">
-                <label for="estudio">ESTUDIO (50):</label>
+                <label for="estudio">ESTUDIO (50)</label>
                 <input type="number" id="estudio" value="0">
             </div>
             <div class="form-row">
-                <label for="invitados">INVITADOS (50):</label>
+                <label for="invitados">INVITADOS (50)</label>
                 <input type="number" id="invitados" value="0">
             </div>
             <div class="form-row">
-                <label for="bautismo">BAUTISMO (500):</label>
+                <label for="bautismo">BAUTISMO (500)</label>
                 <input type="number" id="bautismo" value="0">
             </div>
             <div class="form-row">
-                <label for="culto">CULTO (1000):</label>
+                <label for="culto">CULTO (1000)</label>
                 <input type="number" id="culto" value="0">
             </div>
             <div class="form-row">
-                <label for="apacienta">APACIENTA (5):</label>
+                <label for="apacienta">APACIENTA (5)</label>
                 <input type="number" id="apacienta" value="0">
             </div>
-            <div class="form-row">
-                <label for="firma">FIRMA (10):</label>
-                <input type="number" id="firma" value="0">
-            </div>
-            <div class="form-row">
-                <label for="videoSermon">VIDEO SERMON (10):</label>
-                <input type="number" id="videoSermon" value="0">
-            </div>
-            <div class="form-row">
-                <label for="libroPadre">LIBRO PADRE (10):</label>
-                <input type="number" id="libroPadre" value="0">
-            </div>
-            <div class="form-row">
-                <label for="libroPastor">LIBRO PASTOR (10):</label>
-                <input type="number" id="libroPastor" value="0">
-            </div>
-            <div class="form-row">
-                <label for="ag">FRIMA AG (75):</label>
-                <input type="number" id="ag" value="0">
-            </div>
-            <div class="form-row">
-                <label for="edulms">EDULMS (200):</label>
-                <input type="number" id="edulms" value="0">
-            </div>
 
-            <!-- Categorías con casillas de verificación -->
+            <!-- Checkboxes -->
             <div class="form-row">
                 <label><input type="checkbox" id="miPaginaCheck"> MI PÁGINA (25)</label>
             </div>
             <div class="form-row">
                 <label><input type="checkbox" id="prayDailyCheck"> ORACIÓN DIARIA (25)</label>
             </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="offlineEduCheck"> EDUCACIÓN FUERA DE LÍNEA (50)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="diaDePrepararCheck"> DÍA DE PREPARACIÓN (50)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (10)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="hongoCheck"> HONGO (500)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (x2 total)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="guienoCheck"> GUIENO (-500)</label>
-            </div>
-            <div class="form-row">
-                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
-            </div>
 
             <!-- Botón para calcular el total de puntos -->
-            <div>
-                <button type="button" onclick="calculateTotal()">Calcular Puntos Totales</button>
-            </div>
+            <button type="button" onclick="calculateTotal()">Calcular Puntos Totales</button>
         </form>
 
+        <!-- Total Points -->
         <h2>Puntos Totales: <span id="totalPoints">0</span></h2>
-
-        <!-- Mostrar información del miembro -->
-        <h3>Información del Miembro:</h3>
-        <p><strong>Nombre:</strong> <span id="displayName"></span></p>
-        <p><strong>Fecha:</strong> <span id="displayDate"></span></p>
-        <p><strong>Ubicación:</strong> <span id="displayLocation"></span></p>
-
-        <!-- Mostrar información ingresada -->
-        <h3>Información Ingresada:</h3>
-        <pre id="enteredInfo"></pre>
-
-        <!-- Botón para copiar la información -->
-        <button id="copyButton" onclick="copyInfo()">Copiar Información</button>
-
+        <div class="message" id="successMessage"></div>
+        <div class="error" id="errorMessage"></div>
     </div>
 
     <script>
@@ -248,12 +197,6 @@
             const bautismo = parseInt(document.getElementById('bautismo').value) || 0;
             const culto = parseInt(document.getElementById('culto').value) || 0;
             const apacienta = parseInt(document.getElementById('apacienta').value) || 0;
-            const firma = parseInt(document.getElementById('firma').value) || 0;
-            const videoSermon = parseInt(document.getElementById('videoSermon').value) || 0;
-            const libroPadre = parseInt(document.getElementById('libroPadre').value) || 0;
-            const libroPastor = parseInt(document.getElementById('libroPastor').value) || 0;
-            const ag = parseInt(document.getElementById('ag').value) || 0;
-            const edulms = parseInt(document.getElementById('edulms').value) || 0;
 
             // Add points for number input categories
             total += simple * 1;
@@ -263,83 +206,17 @@
             total += bautismo * 500;
             total += culto * 1000;
             total += apacienta * 5;
-            total += firma * 10;
-            total += videoSermon * 10;
-            total += libroPadre * 10;
-            total += libroPastor * 10;
-            total += ag * 75;
-            total += edulms * 200;
 
             // Add or subtract points based on checkbox selections
             if (document.getElementById('miPaginaCheck').checked) total += 25;
             if (document.getElementById('prayDailyCheck').checked) total += 25;
-            if (document.getElementById('offlineEduCheck').checked) total += 50;
-            if (document.getElementById('diaDePrepararCheck').checked) total += 50;
-            if (document.getElementById('cartaMadreCheck').checked) total += 10;
-            if (document.getElementById('hongoCheck').checked) total += 500;
-            if (document.getElementById('guienoCheck').checked) total -= 500;  // Subtract 500
-            if (document.getElementById('tortugaRojaCheck').checked) total -= 100;  // Subtract 100
-
-            // Arcoiris special case: x2 the total
-            if (document.getElementById('arcoirisCheck').checked) {
-                total *= 2;
-            }
 
             // Display total points
             document.getElementById('totalPoints').innerText = total;
 
-            // Display member name, date, and location
-            const name = document.getElementById('memberName').value;
-            const date = document.getElementById('submissionDate').value;
-            const location = document.getElementById('location').value;
-            document.getElementById('displayName').innerText = name;
-            document.getElementById('displayDate').innerText = date;
-            document.getElementById('displayLocation').innerText = location;
-
-            // Collect all entered data (only if filled or checked)
-            let info = `Nombre del Miembro: ${name}\nFecha: ${date}\nUbicación: ${location}\n\nPuntos Ingresados:\n`;
-
-            if (simple > 0) info += `SIMPLE: ${simple}\n`;
-            if (significativo > 0) info += `SIGNIFICATIVO: ${significativo}\n`;
-            if (estudio > 0) info += `ESTUDIO: ${estudio}\n`;
-            if (invitados > 0) info += `INVITADOS: ${invitados}\n`;
-            if (bautismo > 0) info += `BAUTISMO: ${bautismo}\n`;
-            if (culto > 0) info += `CULTO: ${culto}\n`;
-            if (apacienta > 0) info += `APACIENTA: ${apacienta}\n`;
-            if (firma > 0) info += `FIRMA: ${firma}\n`;
-            if (videoSermon > 0) info += `VIDEO SERMON: ${videoSermon}\n`;
-            if (libroPadre > 0) info += `LIBRO PADRE: ${libroPadre}\n`;
-            if (libroPastor > 0) info += `LIBRO PASTOR: ${libroPastor}\n`;
-            if (ag > 0) info += `FRIMA AG: ${ag}\n`;
-            if (edulms > 0) info += `EDULMS: ${edulms}\n`;
-
-            // Add Check Input values if checked
-            if (document.getElementById('miPaginaCheck').checked) info += `MI PÁGINA: Completado\n`;
-            if (document.getElementById('prayDailyCheck').checked) info += `ORACIÓN DIARIA: Completado\n`;
-            if (document.getElementById('offlineEduCheck').checked) info += `EDUCACIÓN FUERA DE LÍNEA: Completado\n`;
-            if (document.getElementById('diaDePrepararCheck').checked) info += `DÍA DE PREPARACIÓN: Completado\n`;
-            if (document.getElementById('cartaMadreCheck').checked) info += `CARTA A MADRE: Completado\n`;
-            if (document.getElementById('hongoCheck').checked) info += `HONGO: Completado\n`;
-            if (document.getElementById('arcoirisCheck').checked) info += `ARCOIRIS: Completado\n`;
-            if (document.getElementById('guienoCheck').checked) info += `GUIENO: Completado\n`;
-            if (document.getElementById('tortugaRojaCheck').checked) info += `TORTUGA ROJA: Completado\n`;
-
-            // Add the total points to the info
-            info += `\nPuntos Totales: ${total}\n`;
-
-            // Display entered information
-            document.getElementById('enteredInfo').innerText = info;
-        }
-
-        function copyInfo() {
-            const info = document.getElementById('enteredInfo').innerText;
-            const textarea = document.createElement('textarea');
-            textarea.value = info;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('¡Información copiada al portapapeles!');
+            // Show success message
+            document.getElementById('successMessage').innerText = "Cálculo realizado con éxito";
+            document.getElementById('errorMessage').innerText = "";
         }
     </script>
 </body>
