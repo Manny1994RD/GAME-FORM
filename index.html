@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Puntos</title>
     <style>
-        /* General Body Styling */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f9;
@@ -13,9 +12,8 @@
             padding: 20px;
         }
 
-        /* Container Styling */
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 20px;
             background-color: white;
@@ -35,20 +33,17 @@
             gap: 15px;
         }
 
-        /* Form Row Styling */
         .form-row {
             display: flex;
             flex-direction: column;
-            margin-bottom: 10px;
         }
 
         label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #555;
             margin-bottom: 5px;
         }
 
-        /* Input Styling */
         input[type="text"], input[type="number"], input[type="date"], select {
             padding: 10px;
             font-size: 1rem;
@@ -88,18 +83,6 @@
             color: #333;
         }
 
-        /* Success and Error Messages */
-        .message {
-            font-size: 0.9rem;
-            color: green;
-            margin-bottom: 10px;
-        }
-
-        .error {
-            font-size: 0.9rem;
-            color: red;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             form {
@@ -118,6 +101,7 @@
 
         <!-- Formulario -->
         <form id="pointsForm">
+            <!-- Personal Information -->
             <div class="form-row">
                 <label for="memberName">Nombre del Miembro</label>
                 <input type="text" id="memberName" placeholder="Introduce tu nombre" required>
@@ -137,7 +121,7 @@
                 </select>
             </div>
 
-            <!-- Categorías con entrada numérica -->
+            <!-- Numeric Input Fields -->
             <div class="form-row">
                 <label for="simple">SIMPLE (1)</label>
                 <input type="number" id="simple" value="0">
@@ -166,23 +150,66 @@
                 <label for="apacienta">APACIENTA (5)</label>
                 <input type="number" id="apacienta" value="0">
             </div>
+            <div class="form-row">
+                <label for="firma">FIRMA (10)</label>
+                <input type="number" id="firma" value="0">
+            </div>
+            <div class="form-row">
+                <label for="videoSermon">VIDEO SERMON (10)</label>
+                <input type="number" id="videoSermon" value="0">
+            </div>
+            <div class="form-row">
+                <label for="libroPadre">LIBRO PADRE (10)</label>
+                <input type="number" id="libroPadre" value="0">
+            </div>
+            <div class="form-row">
+                <label for="libroPastor">LIBRO PASTOR (10)</label>
+                <input type="number" id="libroPastor" value="0">
+            </div>
+            <div class="form-row">
+                <label for="ag">FRIMA AG (75)</label>
+                <input type="number" id="ag" value="0">
+            </div>
+            <div class="form-row">
+                <label for="edulms">EDULMS (200)</label>
+                <input type="number" id="edulms" value="0">
+            </div>
 
-            <!-- Checkboxes -->
+            <!-- Checkbox Fields -->
             <div class="form-row">
                 <label><input type="checkbox" id="miPaginaCheck"> MI PÁGINA (25)</label>
             </div>
             <div class="form-row">
                 <label><input type="checkbox" id="prayDailyCheck"> ORACIÓN DIARIA (25)</label>
             </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="offlineEduCheck"> EDUCACIÓN FUERA DE LÍNEA (50)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="diaDePrepararCheck"> DÍA DE PREPARACIÓN (50)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="cartaMadreCheck"> CARTA A MADRE (10)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="hongoCheck"> HONGO (500)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="arcoirisCheck"> ARCOIRIS (x2 total)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="guienoCheck"> GUIENO (-500)</label>
+            </div>
+            <div class="form-row">
+                <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
+            </div>
 
-            <!-- Botón para calcular el total de puntos -->
+            <!-- Button -->
             <button type="button" onclick="calculateTotal()">Calcular Puntos Totales</button>
         </form>
 
         <!-- Total Points -->
         <h2>Puntos Totales: <span id="totalPoints">0</span></h2>
-        <div class="message" id="successMessage"></div>
-        <div class="error" id="errorMessage"></div>
     </div>
 
     <script>
@@ -197,6 +224,12 @@
             const bautismo = parseInt(document.getElementById('bautismo').value) || 0;
             const culto = parseInt(document.getElementById('culto').value) || 0;
             const apacienta = parseInt(document.getElementById('apacienta').value) || 0;
+            const firma = parseInt(document.getElementById('firma').value) || 0;
+            const videoSermon = parseInt(document.getElementById('videoSermon').value) || 0;
+            const libroPadre = parseInt(document.getElementById('libroPadre').value) || 0;
+            const libroPastor = parseInt(document.getElementById('libroPastor').value) || 0;
+            const ag = parseInt(document.getElementById('ag').value) || 0;
+            const edulms = parseInt(document.getElementById('edulms').value) || 0;
 
             // Add points for number input categories
             total += simple * 1;
@@ -206,17 +239,30 @@
             total += bautismo * 500;
             total += culto * 1000;
             total += apacienta * 5;
+            total += firma * 10;
+            total += videoSermon * 10;
+            total += libroPadre * 10;
+            total += libroPastor * 10;
+            total += ag * 75;
+            total += edulms * 200;
 
             // Add or subtract points based on checkbox selections
             if (document.getElementById('miPaginaCheck').checked) total += 25;
             if (document.getElementById('prayDailyCheck').checked) total += 25;
+            if (document.getElementById('offlineEduCheck').checked) total += 50;
+            if (document.getElementById('diaDePrepararCheck').checked) total += 50;
+            if (document.getElementById('cartaMadreCheck').checked) total += 10;
+            if (document.getElementById('hongoCheck').checked) total += 500;
+            if (document.getElementById('guienoCheck').checked) total -= 500;  // Subtract 500
+            if (document.getElementById('tortugaRojaCheck').checked) total -= 100;  // Subtract 100
+
+            // Arcoiris special case: x2 the total
+            if (document.getElementById('arcoirisCheck').checked) {
+                total *= 2;
+            }
 
             // Display total points
             document.getElementById('totalPoints').innerText = total;
-
-            // Show success message
-            document.getElementById('successMessage').innerText = "Cálculo realizado con éxito";
-            document.getElementById('errorMessage').innerText = "";
         }
     </script>
 </body>
