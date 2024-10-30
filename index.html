@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Puntos</title>
     <style>
+        /* General Body Styling */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f9;
@@ -12,8 +13,9 @@
             padding: 20px;
         }
 
+        /* Container Styling */
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background-color: white;
@@ -23,24 +25,25 @@
 
         h1 {
             text-align: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #333;
         }
 
         form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
             gap: 15px;
         }
 
-        /* Row Styling */
+        /* Form Row Styling */
         .form-row {
             display: flex;
             flex-direction: column;
+            width: 48%; /* Make sure each row is 48% wide to align side by side */
         }
 
-        .full-width {
-            grid-column: span 2;
+        .form-row.full-width {
+            width: 100%; /* Full width for certain fields */
         }
 
         label {
@@ -64,7 +67,6 @@
 
         /* Button Styling */
         button {
-            grid-column: span 2;
             padding: 15px;
             font-size: 1rem;
             background-color: #007bff;
@@ -73,6 +75,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 100%;
         }
 
         button:hover {
@@ -81,20 +84,35 @@
 
         /* Total Points Display */
         h2 {
-            grid-column: span 2;
             text-align: center;
             font-size: 1.5rem;
             margin: 20px 0;
             color: #333;
         }
 
+        /* Copy Button Styling */
+        #copyButton {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #copyButton:hover {
+            background-color: #218838;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             form {
-                grid-template-columns: 1fr;
+                flex-direction: column;
             }
 
-            button {
+            .form-row {
                 width: 100%;
             }
         }
@@ -126,7 +144,7 @@
                 </select>
             </div>
 
-            <!-- Numeric Input Fields in Two Columns -->
+            <!-- Numeric Input Fields -->
             <div class="form-row">
                 <label for="simple">SIMPLE (1)</label>
                 <input type="number" id="simple" value="0">
@@ -180,7 +198,7 @@
                 <input type="number" id="edulms" value="0">
             </div>
 
-            <!-- Checkbox Fields in Two Columns -->
+            <!-- Checkbox Fields -->
             <div class="form-row full-width">
                 <label><input type="checkbox" id="miPaginaCheck"> MI PÁGINA (25)</label>
             </div>
@@ -209,12 +227,16 @@
                 <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
             </div>
 
-            <!-- Button -->
+            <!-- Button to calculate total points -->
             <button type="button" onclick="calculateTotal()">Calcular Puntos Totales</button>
         </form>
 
-        <!-- Total Points -->
+        <!-- Display total points -->
         <h2>Puntos Totales: <span id="totalPoints">0</span></h2>
+
+        <!-- Display information and copy button -->
+        <div id="enteredInfo"></div>
+        <button id="copyButton" onclick="copyInfo()">Copiar Información</button>
     </div>
 
     <script>
@@ -268,6 +290,54 @@
 
             // Display total points
             document.getElementById('totalPoints').innerText = total;
+
+            // Collect all entered data (only if filled or checked)
+            const name = document.getElementById('memberName').value;
+            const date = document.getElementById('submissionDate').value;
+            const location = document.getElementById('location').value;
+            let info = `Nombre del Miembro: ${name}\nFecha: ${date}\nUbicación: ${location}\n\nPuntos Ingresados:\n`;
+
+            if (simple > 0) info += `SIMPLE: ${simple}\n`;
+            if (significativo > 0) info += `SIGNIFICATIVO: ${significativo}\n`;
+            if (estudio > 0) info += `ESTUDIO: ${estudio}\n`;
+            if (invitados > 0) info += `INVITADOS: ${invitados}\n`;
+            if (bautismo > 0) info += `BAUTISMO: ${bautismo}\n`;
+            if (culto > 0) info += `CULTO: ${culto}\n`;
+            if (apacienta > 0) info += `APACIENTA: ${apacienta}\n`;
+            if (firma > 0) info += `FIRMA: ${firma}\n`;
+            if (videoSermon > 0) info += `VIDEO SERMON: ${videoSermon}\n`;
+            if (libroPadre > 0) info += `LIBRO PADRE: ${libroPadre}\n`;
+            if (libroPastor > 0) info += `LIBRO PASTOR: ${libroPastor}\n`;
+            if (ag > 0) info += `FRIMA AG: ${ag}\n`;
+            if (edulms > 0) info += `EDULMS: ${edulms}\n`;
+
+            // Add Check Input values if checked
+            if (document.getElementById('miPaginaCheck').checked) info += `MI PÁGINA: Completado\n`;
+            if (document.getElementById('prayDailyCheck').checked) info += `ORACIÓN DIARIA: Completado\n`;
+            if (document.getElementById('offlineEduCheck').checked) info += `EDUCACIÓN FUERA DE LÍNEA: Completado\n`;
+            if (document.getElementById('diaDePrepararCheck').checked) info += `DÍA DE PREPARACIÓN: Completado\n`;
+            if (document.getElementById('cartaMadreCheck').checked) info += `CARTA A MADRE: Completado\n`;
+            if (document.getElementById('hongoCheck').checked) info += `HONGO: Completado\n`;
+            if (document.getElementById('arcoirisCheck').checked) info += `ARCOIRIS: Completado\n`;
+            if (document.getElementById('guienoCheck').checked) info += `GUIENO: Completado\n`;
+            if (document.getElementById('tortugaRojaCheck').checked) info += `TORTUGA ROJA: Completado\n`;
+
+            // Add the total points to the info
+            info += `\nPuntos Totales: ${total}\n`;
+
+            // Display entered information
+            document.getElementById('enteredInfo').innerText = info;
+        }
+
+        function copyInfo() {
+            const info = document.getElementById('enteredInfo').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = info;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('¡Información copiada al portapapeles!');
         }
     </script>
 </body>
