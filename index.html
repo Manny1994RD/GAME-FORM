@@ -5,11 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Puntos</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; }
-        input[type="number"], input[type="text"], input[type="date"], select { width: 200px; }
-        label { margin-right: 10px; }
-        #copyButton { margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-size: 1rem;
+        }
+        input[type="number"], input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        #totalPoints, pre {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Mobile-friendly adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1, h2, h3 {
+                font-size: 1.5rem;
+            }
+            button {
+                font-size: 1.2rem;
+                padding: 14px;
+            }
+            label {
+                font-size: 1.2rem;
+            }
+            input[type="number"], input[type="text"], input[type="date"], select {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -17,78 +83,77 @@
         <h1>Formulario de Envío de Puntos</h1>
 
         <!-- Nombre del miembro, fecha y ubicación -->
-        <div>
-            <label>Nombre del Miembro: </label>
-            <input type="text" id="memberName" placeholder="Introduce tu nombre">
-        </div>
-        <div>
-            <label>Fecha: </label>
-            <input type="date" id="submissionDate">
-        </div>
-        <div>
-            <label>Ubicación (Sion): </label>
-            <select id="location">
-                <option value="Santiago">Santiago</option>
-                <option value="La Vega">La Vega</option>
-                <option value="Moca">Moca</option>
-                <option value="Puerto Plata">Puerto Plata</option>
-                <option value="Jarabacoa">Jarabacoa</option>
-            </select>
-        </div>
-        <hr>
-
-        <!-- Categorías con entrada numérica -->
         <form id="pointsForm">
             <div>
-                <label>SIMPLE (1): </label>
+                <label for="memberName">Nombre del Miembro:</label>
+                <input type="text" id="memberName" placeholder="Introduce tu nombre">
+            </div>
+            <div>
+                <label for="submissionDate">Fecha:</label>
+                <input type="date" id="submissionDate">
+            </div>
+            <div>
+                <label for="location">Ubicación (Sion):</label>
+                <select id="location">
+                    <option value="Santiago">Santiago</option>
+                    <option value="La Vega">La Vega</option>
+                    <option value="Moca">Moca</option>
+                    <option value="Puerto Plata">Puerto Plata</option>
+                    <option value="Jarabacoa">Jarabacoa</option>
+                </select>
+            </div>
+
+            <!-- Categorías con entrada numérica -->
+            <div>
+                <label for="simple">SIMPLE (1):</label>
                 <input type="number" id="simple" value="0">
             </div>
             <div>
-                <label>SIGNIFICATIVO (2): </label>
+                <label for="significativo">SIGNIFICATIVO (2):</label>
                 <input type="number" id="significativo" value="0">
             </div>
             <div>
-                <label>ESTUDIO (50): </label>
+                <label for="estudio">ESTUDIO (50):</label>
                 <input type="number" id="estudio" value="0">
             </div>
             <div>
-                <label>INVITADOS (50): </label>
+                <label for="invitados">INVITADOS (50):</label>
                 <input type="number" id="invitados" value="0">
             </div>
             <div>
-                <label>BAUTISMO (500): </label>
+                <label for="bautismo">BAUTISMO (500):</label>
                 <input type="number" id="bautismo" value="0">
             </div>
             <div>
-                <label>CULTO (1000): </label>
+                <label for="culto">CULTO (1000):</label>
                 <input type="number" id="culto" value="0">
             </div>
             <div>
-                <label>APACIENTA (5): </label>
+                <label for="apacienta">APACIENTA (5):</label>
                 <input type="number" id="apacienta" value="0">
             </div>
             <div>
-                <label>FIRMA (10): </label>
+                <label for="firma">FIRMA (10):</label>
                 <input type="number" id="firma" value="0">
             </div>
             <div>
-                <label>VIDEO SERMON (10): </label>
+                <label for="videoSermon">VIDEO SERMON (10):</label>
                 <input type="number" id="videoSermon" value="0">
             </div>
             <div>
-                <label>LIBRO PADRE (10): </label>
+                <label for="libroPadre">LIBRO PADRE (10):</label>
                 <input type="number" id="libroPadre" value="0">
             </div>
             <div>
-                <label>LIBRO PASTOR (10): </label>
+                <label for="libroPastor">LIBRO PASTOR (10):</label>
                 <input type="number" id="libroPastor" value="0">
             </div>
             <div>
-                <label>FRIMA AG (75): </label>
+                <label for="ag">FRIMA AG (75):</label>
                 <input type="number" id="ag" value="0">
             </div>
             <div>
-                <label>EDULMS (200): </label>
+                <label for="edulms">EDULMS (200):</label>
                 <input type="number" id="edulms" value="0">
             </div>
 
