@@ -148,22 +148,37 @@
         function calculateTotal() {
             let total = 0;
 
-            // Per Number Input Logic
-            total += parseInt(document.getElementById('predicar').value) * 1;
-            total += parseInt(document.getElementById('significativo').value) * 2;
-            total += parseInt(document.getElementById('estudio').value) * 50;
-            total += parseInt(document.getElementById('invitados').value) * 50;
-            total += parseInt(document.getElementById('bautismo').value) * 500;
-            total += parseInt(document.getElementById('culto').value) * 1000;
-            total += parseInt(document.getElementById('apacienta').value) * 5;
-            total += parseInt(document.getElementById('firma').value) * 10;
-            total += parseInt(document.getElementById('videoSermon').value) * 10;
-            total += parseInt(document.getElementById('libroPadre').value) * 10;
-            total += parseInt(document.getElementById('libroPastor').value) * 10;
-            total += parseInt(document.getElementById('ag').value) * 75;
-            total += parseInt(document.getElementById('edulms').value) * 200;
+            // Parse inputs as integers and handle empty or invalid input as 0
+            const predicar = parseInt(document.getElementById('predicar').value) || 0;
+            const significativo = parseInt(document.getElementById('significativo').value) || 0;
+            const estudio = parseInt(document.getElementById('estudio').value) || 0;
+            const invitados = parseInt(document.getElementById('invitados').value) || 0;
+            const bautismo = parseInt(document.getElementById('bautismo').value) || 0;
+            const culto = parseInt(document.getElementById('culto').value) || 0;
+            const apacienta = parseInt(document.getElementById('apacienta').value) || 0;
+            const firma = parseInt(document.getElementById('firma').value) || 0;
+            const videoSermon = parseInt(document.getElementById('videoSermon').value) || 0;
+            const libroPadre = parseInt(document.getElementById('libroPadre').value) || 0;
+            const libroPastor = parseInt(document.getElementById('libroPastor').value) || 0;
+            const ag = parseInt(document.getElementById('ag').value) || 0;
+            const edulms = parseInt(document.getElementById('edulms').value) || 0;
 
-            // Check Input Logic
+            // Add points for number input categories
+            total += predicar * 1;
+            total += significativo * 2;
+            total += estudio * 50;
+            total += invitados * 50;
+            total += bautismo * 500;
+            total += culto * 1000;
+            total += apacienta * 5;
+            total += firma * 10;
+            total += videoSermon * 10;
+            total += libroPadre * 10;
+            total += libroPastor * 10;
+            total += ag * 75;
+            total += edulms * 200;
+
+            // Add or subtract points based on checkbox selections
             if (document.getElementById('miPaginaCheck').checked) total += 25;
             if (document.getElementById('prayDailyCheck').checked) total += 25;
             if (document.getElementById('offlineEduCheck').checked) total += 50;
@@ -178,6 +193,7 @@
                 total *= 2;
             }
 
+            // Display total points
             document.getElementById('totalPoints').innerText = total;
 
             // Display member name, date, and location
@@ -191,19 +207,19 @@
             // Collect all entered data (only if filled or checked)
             let info = `Member Name: ${name}\nDate: ${date}\nLocation: ${location}\n\nPoints Submitted:\n`;
 
-            if (document.getElementById('predicar').value > 0) info += `PREDICAR: ${document.getElementById('predicar').value}\n`;
-            if (document.getElementById('significativo').value > 0) info += `SIGNIFICATIVO: ${document.getElementById('significativo').value}\n`;
-            if (document.getElementById('estudio').value > 0) info += `ESTUDIO: ${document.getElementById('estudio').value}\n`;
-            if (document.getElementById('invitados').value > 0) info += `INVITADOS: ${document.getElementById('invitados').value}\n`;
-            if (document.getElementById('bautismo').value > 0) info += `BAUTISMO: ${document.getElementById('bautismo').value}\n`;
-            if (document.getElementById('culto').value > 0) info += `CULTO: ${document.getElementById('culto').value}\n`;
-            if (document.getElementById('apacienta').value > 0) info += `APACIENTA: ${document.getElementById('apacienta').value}\n`;
-            if (document.getElementById('firma').value > 0) info += `FIRMA: ${document.getElementById('firma').value}\n`;
-            if (document.getElementById('videoSermon').value > 0) info += `VIDEO SERMON: ${document.getElementById('videoSermon').value}\n`;
-            if (document.getElementById('libroPadre').value > 0) info += `LIBRO PADRE: ${document.getElementById('libroPadre').value}\n`;
-            if (document.getElementById('libroPastor').value > 0) info += `LIBRO PASTOR: ${document.getElementById('libroPastor').value}\n`;
-            if (document.getElementById('ag').value > 0) info += `AG: ${document.getElementById('ag').value}\n`;
-            if (document.getElementById('edulms').value > 0) info += `EDULMS: ${document.getElementById('edulms').value}\n`;
+            if (predicar > 0) info += `PREDICAR: ${predicar}\n`;
+            if (significativo > 0) info += `SIGNIFICATIVO: ${significativo}\n`;
+            if (estudio > 0) info += `ESTUDIO: ${estudio}\n`;
+            if (invitados > 0) info += `INVITADOS: ${invitados}\n`;
+            if (bautismo > 0) info += `BAUTISMO: ${bautismo}\n`;
+            if (culto > 0) info += `CULTO: ${culto}\n`;
+            if (apacienta > 0) info += `APACIENTA: ${apacienta}\n`;
+            if (firma > 0) info += `FIRMA: ${firma}\n`;
+            if (videoSermon > 0) info += `VIDEO SERMON: ${videoSermon}\n`;
+            if (libroPadre > 0) info += `LIBRO PADRE: ${libroPadre}\n`;
+            if (libroPastor > 0) info += `LIBRO PASTOR: ${libroPastor}\n`;
+            if (ag > 0) info += `AG: ${ag}\n`;
+            if (edulms > 0) info += `EDULMS: ${edulms}\n`;
 
             // Add Check Input values if checked
             if (document.getElementById('miPaginaCheck').checked) info += `MI PAGINA: Completed\n`;
