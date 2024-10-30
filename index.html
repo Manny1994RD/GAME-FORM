@@ -40,12 +40,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: nowrap; /* Ensure label and input stay on the same line */
         }
 
         label {
             font-size: 1rem;
             color: #555;
             flex: 1;
+            white-space: nowrap; /* Prevent label from wrapping on small screens */
         }
 
         input[type="text"], input[type="number"], input[type="date"], select {
@@ -104,19 +106,24 @@
             background-color: #218838;
         }
 
-        /* Responsive Design */
+        /* Mobile adjustments to ensure label and input stay on the same line */
         @media (max-width: 768px) {
             .form-row {
-                flex-direction: column;
-                align-items: flex-start;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: nowrap;
+                gap: 10px; /* Add spacing between label and input */
             }
 
-            input[type="number"], select {
-                width: 100%;
+            label {
+                flex: 1;
+                font-size: 0.9rem;
             }
 
-            button {
-                width: 100%;
+            input[type="text"], input[type="number"], input[type="date"], select {
+                width: 50%; /* Adjust input field width on smaller screens */
+                flex: none;
             }
         }
     </style>
