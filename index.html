@@ -236,6 +236,10 @@
             <div class="form-row">
                 <label><input type="checkbox" id="tortugaRojaCheck"> TORTUGA ROJA (-100)</label>
             </div>
+            <!-- New Checkbox for Misión en Línea -->
+            <div class="form-row">
+                <label><input type="checkbox" id="misionEnLineaCheck"> MISIÓN EN LÍNEA (20)</label>
+            </div>
 
             <!-- Button to calculate total points -->
             <button type="button" onclick="calculateTotal()">Calcular Puntos Totales</button>
@@ -271,7 +275,7 @@
             // Add points for number input categories
             total += simple * 1;
             total += significativo * 2;
-            total += estudio * 10; // Corrected to 10
+            total += estudio * 10;
             total += invitados * 50;
             total += bautismo * 500;
             total += culto * 1000;
@@ -290,8 +294,9 @@
             if (document.getElementById('diaDePrepararCheck').checked) total += 50;
             if (document.getElementById('cartaMadreCheck').checked) total += 10;
             if (document.getElementById('hongoCheck').checked) total += 500;
-            if (document.getElementById('guienoCheck').checked) total -= 500;  // Subtract 500
-            if (document.getElementById('tortugaRojaCheck').checked) total -= 100;  // Subtract 100
+            if (document.getElementById('misionEnLineaCheck').checked) total += 20; // New checkbox for "Misión en Línea"
+            if (document.getElementById('guienoCheck').checked) total -= 500;
+            if (document.getElementById('tortugaRojaCheck').checked) total -= 100;
 
             // Arcoiris special case: x2 the total
             if (document.getElementById('arcoirisCheck').checked) {
@@ -328,6 +333,7 @@
             if (document.getElementById('diaDePrepararCheck').checked) info += `DÍA DE PREPARACIÓN: Completado\n`;
             if (document.getElementById('cartaMadreCheck').checked) info += `CARTA A MADRE: Completado\n`;
             if (document.getElementById('hongoCheck').checked) info += `HONGO: Completado\n`;
+            if (document.getElementById('misionEnLineaCheck').checked) info += `MISIÓN EN LÍNEA: Completado\n`;
             if (document.getElementById('arcoirisCheck').checked) info += `ARCOIRIS: Completado\n`;
             if (document.getElementById('guienoCheck').checked) info += `GUIENO: Completado\n`;
             if (document.getElementById('tortugaRojaCheck').checked) info += `TORTUGA ROJA: Completado\n`;
