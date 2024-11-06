@@ -156,19 +156,19 @@
 
             <!-- Numeric Input Fields -->
             <div class="form-row">
-                <label for="simple">SIMPLE (1)</label>
+                <label for="simple">SIMPLE (10)</label>
                 <input type="number" id="simple" value="0">
             </div>
             <div class="form-row">
-                <label for="significativo">SIGNIFICATIVO (2)</label>
+                <label for="significativo">SIGNIFICATIVO (20)</label>
                 <input type="number" id="significativo" value="0">
             </div>
             <div class="form-row">
-                <label for="estudio">ESTUDIO (10)</label>
+                <label for="estudio">ESTUDIO (30)</label>
                 <input type="number" id="estudio" value="0">
             </div>
             <div class="form-row">
-                <label for="invitados">INVITADOS (50)</label>
+                <label for="invitados">INVITADOS (100)</label>
                 <input type="number" id="invitados" value="0">
             </div>
             <div class="form-row">
@@ -273,10 +273,10 @@
             const edulms = parseInt(document.getElementById('edulms').value) || 0;
 
             // Add points for number input categories
-            total += simple * 1;
-            total += significativo * 2;
-            total += estudio * 10;
-            total += invitados * 50;
+            total += simple * 10;
+            total += significativo * 20;
+            total += estudio * 30;
+            total += invitados * 100;
             total += bautismo * 500;
             total += culto * 1000;
             total += apacienta * 5;
